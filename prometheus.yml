@@ -29,7 +29,7 @@ scrape_configs:
     - targets: ['localhost:9090']
 
   
- - job_name: 'customer-api'
+  - job_name: 'customer-api'
 
     # Override the global default and scrape targets from this job every 5 seconds.
     scrape_interval: 5s
@@ -38,4 +38,8 @@ scrape_configs:
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ['customer-app:7074']
+      - targets: ['customer-app:7074','host.docker.internal:7076']
+  
+  - job_name: 'windows'
+    static_configs:
+      - targets: ['192.168.1.36:9182']
