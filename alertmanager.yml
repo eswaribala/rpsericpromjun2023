@@ -1,0 +1,39 @@
+global:
+  resolve_timeout: 1m
+  slack_api_url: 'https://hooks.slack.com/services/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'
+
+route:
+  group_by: [ alertname ]
+  receiver: 'mail' # default receiver
+  repeat_interval: 24h
+  routes:
+    - receiver: 'teams'
+      repeat_interval: 12h
+      matchers:
+        - severity="medium"
+
+    - receiver: 'teams'
+      repeat_interval: 4h
+      matchers:
+        - severity="high"
+  receiver: 'slack-notifications' 
+
+receivers:
+  - name: 'mail'
+    email_configs:
+      - smarthost: 'yourmailhost.com:465'
+        auth_username: 'yourmail@yourmailhost.com'
+        auth_password: "your mail password"
+        from: 'yourmail@yourmailhost.com'
+        to: 'someonesmail@yourmailhost.com'
+        require_tls: false
+
+  - name: 'teams'
+    webhook_configs:
+      - url: "http://prom2teams:8089"
+        send_resolved: true
+
+  - name: 'slack-notifications'
+    slack_configs:
+      - channel: '#monitoring-instances'
+        send_resolved: true
