@@ -1,1 +1,3 @@
 docker run -p 7076:7074 --name eric-c2 --net ericnetwork --link customerapidocker_mysql_1  -d customerapp:latest
+
+docker build -f dockerfile -t metricexp .
