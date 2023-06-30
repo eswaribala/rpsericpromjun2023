@@ -1,3 +1,4 @@
 docker run -p 7076:7074 --name eric-c2 --net ericnetwork --link customerapidocker_mysql_1  -d customerapp:latest
 
 docker build -f dockerfile -t metricexp .
+docker cp Ericsson_logo.svg.png 7304583eae45:/usr/share/grafana/public/img
