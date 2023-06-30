@@ -7,6 +7,15 @@ services:
     restart: unless-stopped
     expose:
       - 9100
+
+  elasticsearch_exporter:
+    image: quay.io/prometheuscommunity/elasticsearch-exporter:latest
+    command:
+     - '--es.uri=http://elasticsearch:9200'
+    restart: always
+    ports:
+    - "9114:9114"
+
   prometheus:
     image: prom/prometheus
     restart: always
