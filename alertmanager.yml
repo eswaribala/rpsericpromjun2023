@@ -21,10 +21,10 @@ route:
 receivers:
   - name: 'mail'
     email_configs:
-      - smarthost: 'yourmailhost.com:465'
-        auth_username: 'yourmail@yourmailhost.com'
+      - smarthost: 'smtp.gmail.com:465'
+        auth_username: 'parameswaribala@gmail.com'
         auth_password: "your mail password"
-        from: 'yourmail@yourmailhost.com'
+        from: 'parameswaribala@gmail.com'
         to: 'someonesmail@yourmailhost.com'
         require_tls: false
 

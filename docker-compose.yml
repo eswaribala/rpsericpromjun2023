@@ -16,6 +16,12 @@ services:
     ports:
     - "9114:9114"
 
+  custom_exporter:
+    image: metricexp:latest    
+    restart: always
+    ports:
+    - "9877:9877"
+
   prometheus:
     image: prom/prometheus
     restart: always
@@ -37,6 +43,20 @@ services:
       - 3000:3000
     #networks:
       #- ericnetwork
+
+  alertmanager:
+    image: prom/alertmanager:v0.23.0
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager.yml:/config/alertmanager.yml:ro 
+      - "./alertmanager:/config"
+      - alertmanager-data:/data
+    #command: --config.file=/config/alertmanager.yml --log.level=debug 
+
+volumes:
+   alertmanager-data:
 ### put all the networks here
 #networks:
   #ericnetwork:
